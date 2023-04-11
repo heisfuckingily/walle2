@@ -8,6 +8,13 @@
     android:background="#757888"
     tools:context=".MainActivity">
 
+    <RelativeLayout
+        android:layout_width="374dp"
+        android:layout_height="113dp"
+        android:background="@drawable/wavyline"
+        tools:layout_editor_absoluteX="18dp"
+        tools:layout_editor_absoluteY="16dp" />
+
     <TextView
 
         android:id="@+id/textView3"
@@ -87,16 +94,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/icons8_battery_32" />
-
-    <ImageView
-        android:id="@+id/wavyline_svg"
-        android:layout_width="114dp"
-        android:layout_height="82dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginRight="140dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/wavyline" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
