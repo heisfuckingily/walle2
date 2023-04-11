@@ -88,6 +88,16 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/icons8_battery_32" />
 
+    <ImageView
+        android:id="@+id/wavyline_svg"
+        android:layout_width="114dp"
+        android:layout_height="82dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginRight="70dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/wavyline" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
