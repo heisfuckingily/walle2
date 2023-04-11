@@ -1,4 +1,25 @@
 <resources>
     <string name="app_name">wall e</string>
 
+    <string name="next">NEXT</string>
+    <string name="finish">FINISH</string>
+    <string name="skip">SKIP</string>
+    <string name="walking">Walking</string>
+    <string name="walking_desc">Go for a walk after meal for better digestion</string>
+    <string name="cycling">Cycling</string>
+    <string name="cycling_desc">if you can\'t run, can\'t walk, then atleat rotate your legs</string>
+    <string name="fit">Become FIT</string>
+    <string name="fit_desc">Do either of the earlier and get a body like this</string>
+    <string name="swimming">Swimming</string>
+    <string name="swimming_desc">Explore the world under water with swimming</string>
+    <string name="running">Running</string>
+    <string name="running_desc">Daily running keeps body in shape and inrease stamina</string>
+    <string name="title_activity_main2">MainActivity2</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 </resources>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/commonbg1"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <!-- image on the screen -->
+
+    <!-- Title text -->
+
+    <ImageView
+
+        android:layout_width="285dp"
+        android:layout_height="195dp"
+        android:layout_marginTop="@dimen/content_margin"
+        android:src="@drawable/cogwheel" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/content_margin"
+        android:fontFamily="sans-serif-black"
+        android:text="Configurable and Easy to Use"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+
+    <!-- Desc text -->
+    <TextView
+        android:layout_width="365dp"
+        android:layout_height="97dp"
+        android:layout_marginTop="@dimen/content_margin"
+        android:fontFamily="sans-serif-black"
+        android:text="Use the minimalistic and simple User Iterface to configure your Wall-E robot!"
+        android:textAlignment="center"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+        android:textSize="18sp" />
+
+</LinearLayout>

@@ -13,8 +13,14 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="Theme.WallE.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.WallE.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.WallE.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 
-    
-    
 </resources>
