@@ -8,7 +8,7 @@ class PrefManager(context: Context) {
     private var editor: SharedPreferences.Editor
 
     private val _prefName: String = "IntroScreen"
-    val _isFirstLaunch: String = "IsFirstLaunch5"
+    val _isFirstLaunch: String = "IsFirstLaunchX"
 
     init {
         sharedPreferences = context.getSharedPreferences(_prefName, Context.MODE_PRIVATE)
