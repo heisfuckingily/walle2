@@ -74,13 +74,13 @@
         app:layout_constraintVertical_bias="0.931" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnStartConnection"
         android:layout_width="128dp"
         android:layout_height="58dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/shape5"
         android:backgroundTint="#051F4C"
-        android:text="connected"
+        android:text="connect"
         app:layout_constraintEnd_toEndOf="@+id/imageView"
         app:layout_constraintHorizontal_bias="0.051"
         app:layout_constraintStart_toStartOf="parent"
