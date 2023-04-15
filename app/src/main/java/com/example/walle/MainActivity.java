@@ -1,7 +1,9 @@
 package com.example.walle;
 
 import android.Manifest;
+import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -12,17 +14,20 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.util.ArraySet;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Set;
 import java.util.UUID;
 
 import kotlin.Metadata;
@@ -40,22 +45,16 @@ public final class MainActivity extends AppCompatActivity implements AdapterView
 
     Button _btnStartConnection;
 
-    private BluetoothConnectionService _bluetoothConnectionService;
-    private BluetoothDevice _bluetoothDevice;
-
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_main);
 
         this._btnStartConnection = (Button) findViewById(R.id.btnStartConnection);
 
-        this._bluetoothConnectionService = new BluetoothConnectionService(this);
-        this.registerReceiver(mBRC1, new IntentFilter(BluetoothDevice.ACTION_BOND_STATE_CHANGED));
-
         _btnStartConnection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                StartConnection();
+                setContentView(R.layout.activity_bluetooth_list);
             }
         });
     }
@@ -64,40 +63,6 @@ public final class MainActivity extends AppCompatActivity implements AdapterView
         String var6 = "Not yet implemented";
         throw new NotImplementedError("An operation is not implemented: " + var6);
     }
-
-    private void StartConnection() {
-        StartBluetoothConnection(_bluetoothDevice, UUID.fromString("de8a3f06-73b1-48df-89cc-6db78f31d64f"));
-    }
-
-    public void StartBluetoothConnection(BluetoothDevice device, UUID uuid) {
-        BluetoothConnectionService var10000 = this._bluetoothConnectionService;
-        var10000.startClient(device, uuid);
-    }
-
-    private final BroadcastReceiver mBRC1 = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
-
-            if (action.equals(BluetoothDevice.ACTION_BOND_STATE_CHANGED)) {
-                BluetoothDevice dev = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-                if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED)
-                    return;
-                switch (dev.getBondState()) {
-                    case BluetoothDevice.BOND_BONDED:
-                        Log.d(Tag, "Connected TO RFCOM");
-                        _bluetoothDevice = dev;
-                        break;
-                    case BluetoothDevice.BOND_BONDING:
-                        Log.d(Tag, "BOND_BONDING");
-                        break;
-                    case BluetoothDevice.BOND_NONE:
-                        Log.d(Tag, "BOND_NONE");
-                        break;
-                }
-            }
-        }
-    };
 }
 
 
