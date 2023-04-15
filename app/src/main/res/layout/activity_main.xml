@@ -79,12 +79,13 @@
         android:layout_height="58dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/shape5"
-        android:backgroundTint="#051F4C"
+        android:backgroundTint="#E91E63"
         android:text="connect"
         app:layout_constraintEnd_toEndOf="@+id/imageView"
         app:layout_constraintHorizontal_bias="0.051"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
     <ImageView
         android:id="@+id/imageView"
