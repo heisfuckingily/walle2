@@ -24,6 +24,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -44,6 +45,12 @@ import kotlin.jvm.internal.Intrinsics;
 public final class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
     private static final String Tag = "MainActivity";
     private static final UUID Uuid_Insecure = UUID.fromString("de8a3f06-73b1-48df-89cc-6db78f31d64f");
+
+    private static final int BT1_PERMISSION_CODE = 1001;
+    private static final int BT2_PERMISSION_CODE = 1002;
+    private static final int BT3_PERMISSION_CODE = 1003;
+    private static final int BT4_PERMISSION_CODE = 1004;
+    private static final int BT5_PERMISSION_CODE = 1005;
 
     public static final Set<BluetoothDevice> devicesList = new ArraySet<>();
 
@@ -77,11 +84,26 @@ public final class MainActivity extends AppCompatActivity implements AdapterView
         discoverableIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 300);
         startActivityForResult(discoverableIntent, requestCode);
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.BLUETOOTH_CONNECT}, 1);
-            return;
+            Toast.makeText(MainActivity.this, "Permissions not granted right now", Toast.LENGTH_SHORT).show();
+            checkPermission( android.Manifest.permission.BLUETOOTH_ADMIN, BT4_PERMISSION_CODE);
+            checkPermission( android.Manifest.permission.BLUETOOTH, BT1_PERMISSION_CODE);
+            checkPermission( android.Manifest.permission.ACCESS_FINE_LOCATION, BT2_PERMISSION_CODE);
+            checkPermission( android.Manifest.permission.ACCESS_COARSE_LOCATION, BT3_PERMISSION_CODE);
+            checkPermission( android.Manifest.permission.BLUETOOTH_SCAN, BT5_PERMISSION_CODE);
+            checkPermission( Manifest.permission.BLUETOOTH_CONNECT, 2);
         }
         ProgressDialog.show(this, "Accepting now!", "Waiting for data...", true);
         new AcceptThread(MainActivity.this, adapter, Uuid_Insecure);
+    }
+
+    public void checkPermission(String permission, int requestCode)
+    {
+        if (ContextCompat.checkSelfPermission(MainActivity.this, permission) == PackageManager.PERMISSION_DENIED) {
+            ActivityCompat.requestPermissions(MainActivity.this, new String[] { permission }, requestCode);
+        }
+        else {
+            Toast.makeText(MainActivity.this, "Permission already granted", Toast.LENGTH_SHORT).show();
+        }
     }
 }
 

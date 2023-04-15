@@ -8,6 +8,7 @@ import android.bluetooth.BluetoothSocket;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
 
@@ -32,7 +33,9 @@ public class AcceptThread extends Thread {
                 return;
             }
             tmp = adapter.listenUsingRfcommWithServiceRecord("Name", uuid);
-        } catch (Exception e) { e.printStackTrace(); }
+        } catch (Exception e) {
+            Toast.makeText(c, "EX: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
         _socket = tmp;
     }
 
@@ -44,6 +47,7 @@ public class AcceptThread extends Thread {
                 socket = _socket.accept();
             } catch (IOException e) {
                 Log.e(TAG, "Socket's accept() method failed", e);
+                Toast.makeText(c, "EX: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 break;
             }
 
@@ -53,7 +57,10 @@ public class AcceptThread extends Thread {
                 manageMyConnectedSocket(socket);
                 try {
                     _socket.close();
-                } catch (Exception e) { e.printStackTrace(); }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(c, "EX: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
                 break;
             }
         }
@@ -75,7 +82,9 @@ public class AcceptThread extends Thread {
             BufferedReader reader = new BufferedReader(new InputStreamReader(is));
             String s = reader.readLine();
             Log.i(TAG, "Output -> " + s);
-            ProgressDialog.show(c, s, "Data RECEIVED", true);
-        } catch (Exception e) { }
+            Toast.makeText(c, "Output ----> " + s, Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            Toast.makeText(c, "EX: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 }
