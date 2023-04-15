@@ -1,6 +1,7 @@
 package com.example.walle;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothManager;
@@ -42,6 +43,9 @@ import kotlin.jvm.internal.Intrinsics;
 )
 public final class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
     private static final String Tag = "MainActivity";
+    private static final UUID Uuid_Insecure = UUID.fromString("de8a3f06-73b1-48df-89cc-6db78f31d64f");
+
+    public static final Set<BluetoothDevice> devicesList = new ArraySet<>();
 
     Button _btnStartConnection;
 
@@ -54,7 +58,7 @@ public final class MainActivity extends AppCompatActivity implements AdapterView
         _btnStartConnection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setContentView(R.layout.activity_bluetooth_list);
+                initBt();
             }
         });
     }
@@ -62,6 +66,22 @@ public final class MainActivity extends AppCompatActivity implements AdapterView
     public void onItemClick(@Nullable AdapterView p0, @Nullable View p1, int p2, long p3) {
         String var6 = "Not yet implemented";
         throw new NotImplementedError("An operation is not implemented: " + var6);
+    }
+
+    private void initBt() {
+        BluetoothManager btmanager = getSystemService(BluetoothManager.class);
+        BluetoothAdapter adapter = btmanager.getAdapter();
+        int requestCode = 1;
+        Intent discoverableIntent =
+                new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
+        discoverableIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 300);
+        startActivityForResult(discoverableIntent, requestCode);
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.BLUETOOTH_CONNECT}, 1);
+            return;
+        }
+        ProgressDialog.show(this, "Accepting now!", "Waiting for data...", true);
+        new AcceptThread(MainActivity.this, adapter, Uuid_Insecure);
     }
 }
 
