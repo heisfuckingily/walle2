@@ -78,11 +78,6 @@ public final class MainActivity extends AppCompatActivity implements AdapterView
     private void initBt() {
         BluetoothManager btmanager = getSystemService(BluetoothManager.class);
         BluetoothAdapter adapter = btmanager.getAdapter();
-        int requestCode = 1;
-        Intent discoverableIntent =
-                new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
-        discoverableIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 300);
-        startActivityForResult(discoverableIntent, requestCode);
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
             Toast.makeText(MainActivity.this, "Permissions not granted right now", Toast.LENGTH_SHORT).show();
             checkPermission( android.Manifest.permission.BLUETOOTH_ADMIN, BT4_PERMISSION_CODE);
@@ -93,7 +88,7 @@ public final class MainActivity extends AppCompatActivity implements AdapterView
             checkPermission( Manifest.permission.BLUETOOTH_CONNECT, 2);
         }
         ProgressDialog.show(this, "Accepting now!", "Waiting for data...", true);
-        new AcceptThread(MainActivity.this, adapter, Uuid_Insecure);
+        new AcceptThread(MainActivity.this, adapter, Uuid_Insecure).start();
     }
 
     public void checkPermission(String permission, int requestCode)

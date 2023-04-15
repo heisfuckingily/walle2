@@ -27,9 +27,11 @@ public class AcceptThread extends Thread {
 
     public AcceptThread(Context c, BluetoothAdapter adapter, UUID uuid) {
         this.c = c;
+        Toast.makeText(c, "Debug 1", Toast.LENGTH_SHORT).show();
         BluetoothServerSocket tmp = null;
         try {
             if (ActivityCompat.checkSelfPermission(c, android.Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(c, "Debug 123t127638712371554158e24", Toast.LENGTH_SHORT).show();
                 return;
             }
             tmp = adapter.listenUsingRfcommWithServiceRecord("Name", uuid);
@@ -77,6 +79,7 @@ public class AcceptThread extends Thread {
 
     public void manageMyConnectedSocket(BluetoothSocket socket) {
         try {
+
             InputStream is = socket.getInputStream();
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(is));
