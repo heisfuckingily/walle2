@@ -7,6 +7,7 @@ import android.bluetooth.BluetoothServerSocket;
 import android.bluetooth.BluetoothSocket;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -32,7 +33,6 @@ public class AcceptThread extends Thread {
         try {
             if (ActivityCompat.checkSelfPermission(c, android.Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(c, "Debug 123t127638712371554158e24", Toast.LENGTH_SHORT).show();
-                return;
             }
             tmp = adapter.listenUsingRfcommWithServiceRecord("Name", uuid);
         } catch (Exception e) {
@@ -42,11 +42,14 @@ public class AcceptThread extends Thread {
     }
 
     public void run() {
+        Looper.prepare();
+        Toast.makeText(c, "Debug RUNUNRURNRUNRUNRUNRUNRUNRU RUN NIGGAAA", Toast.LENGTH_SHORT).show();
         BluetoothSocket socket = null;
         // Keep listening until exception occurs or a socket is returned.
         while (true) {
             try {
                 socket = _socket.accept();
+                Toast.makeText(c, "Debug ACCEPTQ!@#!@", Toast.LENGTH_SHORT).show();
             } catch (IOException e) {
                 Log.e(TAG, "Socket's accept() method failed", e);
                 Toast.makeText(c, "EX: " + e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -57,13 +60,13 @@ public class AcceptThread extends Thread {
                 // A connection was accepted. Perform work associated with
                 // the connection in a separate thread.
                 manageMyConnectedSocket(socket);
+                Toast.makeText(c, "Debug 3", Toast.LENGTH_SHORT).show();
                 try {
                     _socket.close();
                 } catch (Exception e) {
                     e.printStackTrace();
                     Toast.makeText(c, "EX: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
-                break;
             }
         }
     }
@@ -79,6 +82,7 @@ public class AcceptThread extends Thread {
 
     public void manageMyConnectedSocket(BluetoothSocket socket) {
         try {
+            Toast.makeText(c, "Debug 5", Toast.LENGTH_SHORT).show();
 
             InputStream is = socket.getInputStream();
 
